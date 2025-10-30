@@ -44,13 +44,12 @@ export default function LoginPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        background: "#f4f6fb",
         padding: "20px",
       }}
     >
       <div
         style={{
-          background: "#fff",
+          background: "#f4f6fb",
           padding: "30px",
           borderRadius: "10px",
           width: "100%",

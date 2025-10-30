@@ -1,19 +1,24 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function RootLayout({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
-    const token =
-      typeof window !== "undefined" && localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    const checkLogin = () => setIsLoggedIn(!!localStorage.getItem("token"));
+    checkLogin();
+
+    window.addEventListener("storage", checkLogin);
+    return () => window.removeEventListener("storage", checkLogin);
   }, []);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
+    router.push("/");
   };
 
   return (
